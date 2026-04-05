@@ -9,18 +9,57 @@
 
 body{
 margin:0;
-background:#000;
+background:#0b0b0b;
 display:flex;
 justify-content:center;
 align-items:center;
 height:100vh;
 overflow:hidden;
+font-family:Arial, sans-serif;
 }
+
+/* concept board image */
 
 .board{
 max-width:100%;
 max-height:100vh;
 cursor:pointer;
+opacity:0;
+animation:fadeIn 1.5s ease forwards;
+transition:transform .6s ease;
+}
+
+.board:hover{
+transform:scale(1.02);
+}
+
+/* audio indicator */
+
+.audio-indicator{
+position:fixed;
+top:20px;
+right:25px;
+font-size:22px;
+color:white;
+opacity:.7;
+transition:.3s;
+}
+
+.audio-indicator.active{
+opacity:1;
+}
+
+/* animations */
+
+@keyframes fadeIn{
+from{
+opacity:0;
+transform:scale(.96);
+}
+to{
+opacity:1;
+transform:scale(1);
+}
 }
 
 </style>
@@ -29,7 +68,11 @@ cursor:pointer;
 
 <body>
 
-<img src="./mother-board.jpg" class="board" onclick="playAudio()">
+<img src="./mother-board.jpg" class="board" onclick="toggleAudio()">
+
+<div id="indicator" class="audio-indicator">
+🔊
+</div>
 
 <audio id="audio">
 <source src="./mother-audio.mp3" type="audio/mpeg">
@@ -37,13 +80,17 @@ cursor:pointer;
 
 <script>
 
-function playAudio(){
 var audio = document.getElementById("audio");
+var indicator = document.getElementById("indicator");
+
+function toggleAudio(){
 
 if(audio.paused){
 audio.play();
+indicator.classList.add("active");
 }else{
 audio.pause();
+indicator.classList.remove("active");
 }
 
 }
