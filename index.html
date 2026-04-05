@@ -6,37 +6,48 @@
 <title>Mother Tee Concept Board</title>
 
 <style>
+
 body{
 margin:0;
-background:#e7caa3;
+background:#000;
 display:flex;
 justify-content:center;
 align-items:center;
 height:100vh;
+overflow:hidden;
 }
 
-img{
-width:100%;
-max-width:3000px;
-height:auto;
+.board{
+max-width:100%;
+max-height:100vh;
 cursor:pointer;
 }
+
 </style>
 
 </head>
 
 <body>
 
-<img src="mother-board.jpg" onclick="playAudio()">
+<img src="./mother-board.jpg" class="board" onclick="playAudio()">
 
 <audio id="audio">
-  <source src="mother-audio.mp3" type="audio/mpeg">
+<source src="./mother-audio.mp3" type="audio/mpeg">
 </audio>
 
 <script>
+
 function playAudio(){
-document.getElementById("audio").play();
+var audio = document.getElementById("audio");
+
+if(audio.paused){
+audio.play();
+}else{
+audio.pause();
 }
+
+}
+
 </script>
 
 </body>
